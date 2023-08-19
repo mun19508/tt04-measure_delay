@@ -1,5 +1,12 @@
-module tt_um_uP_top(input  clk, ena, input [3:0] pushbuttons, output [11:0] PC, address_RAM, output [7:0] program_byte,
-          output [3:0] instr, oprnd, data_bus, FF_out, accu, output phase, c_flag, z_flag);
+module tt_um_uP_top(
+    input clk, 
+    input ena,
+    input rst_n, 
+    input [3:0] pushbuttons, 
+    output [11:0] PC, address_RAM, 
+    output [7:0] program_byte,
+    output [3:0] instr, oprnd, data_bus, FF_out, accu, 
+    output phase, c_flag, z_flag);
    
     // estos con cables que son usados para conectar las salidas de decode
     wire loadPC;
