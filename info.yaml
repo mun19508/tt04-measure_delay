@@ -24,7 +24,7 @@ documentation:
   author:       "Angel Orellana"      # Your name
   title:        "Microproccesor"      # Project title
   language:     "verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  ""      # Short description of what your project does
+  description:  "A microprocessor of 8-bit"      # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
