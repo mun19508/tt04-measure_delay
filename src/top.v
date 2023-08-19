@@ -1,4 +1,4 @@
-module tt_um_uP_top(input  clk, reset, input [3:0] pushbuttons, output [11:0] PC, address_RAM, output [7:0] program_byte,
+module tt_um_uP_top(input  clk, ena, input [3:0] pushbuttons, output [11:0] PC, address_RAM, output [7:0] program_byte,
           output [3:0] instr, oprnd, data_bus, FF_out, accu, output phase, c_flag, z_flag);
    
     // estos con cables que son usados para conectar las salidas de decode
@@ -36,11 +36,11 @@ module tt_um_uP_top(input  clk, reset, input [3:0] pushbuttons, output [11:0] PC
 
     assign address_RAM = {oprnd,program_byte};
     //------------------ CONTROL DEL PROGRAMA -------------------------------
-    Contador12b programCouter(loadPC,incPC, clk, reset, address_RAM, PC ); //program counter
-    //counter_12b cont(clk,reset, loadPC,incPC,address_RAM, PC);
+    Contador12b programCouter(loadPC,incPC, clk, ena, address_RAM, PC ); //program counter
+    //counter_12b cont(clk,ena, loadPC,incPC,address_RAM, PC);
     Memory  programROM(PC, program_byte); // memoria de programa
-    FlipFlopD4b fetchOp(program_byte[3:0], ~phase, reset, clk, oprnd);
-    FlipFlopD4b  fetchIns(program_byte[7:4], ~phase, reset, clk, instr);
-    FlipFlopT   fase(1'b1, reset, clk, phase);
+    FlipFlopD4b fetchOp(program_byte[3:0], ~phase, ena, clk, oprnd);
+    FlipFlopD4b  fetchIns(program_byte[7:4], ~phase, ena, clk, instr);
+    FlipFlopT   fase(1'b1, ena, clk, phase);
 
 endmodule
