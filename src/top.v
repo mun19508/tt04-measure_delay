@@ -1,5 +1,4 @@
-# good
-module tt_um_counter(
+module tt_um_counter #( parameter MAX_COUNT = 10_000_000 )
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
