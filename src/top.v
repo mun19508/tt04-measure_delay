@@ -1,53 +1,24 @@
-module tt_um_uP_top(
-    input clk, 
-    input ena,
-    input rst_n, 
-    input [3:0] pushbuttons, 
-    output [11:0] PC, address_RAM, 
-    output [7:0] program_byte,
-    output [3:0] instr, oprnd, data_bus, FF_out, accu, 
-    output phase, c_flag, z_flag);
-   
+# good
+module tt_um_counter #( parameter MAX_COUNT = 10_000_000 ) (
+    input  wire [7:0] ui_in,    // Dedicated inputs
+    output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
+);
     // estos con cables que son usados para conectar las salidas de decode
     wire loadPC;
-    wire incPC;
-    wire loadA;
-    wire loadFlags;
-    wire [2:0] opALU;
-    wire cs;
-    wire we;
-    wire eoALU;
-    wire oeIn;
-    wire oeOprnd;
-    wire loadOut;
-    wire [12:0] outDecode;
-    wire [6:0] inDecode;
-
-    //provisional
-    assign c_flag = 0;
-    assign z_flag = 0;
-    assign inDecode = {instr, c_flag,z_flag,phase}; 
-    Decode dec(inDecode, outDecode);
+    wire counter_value;
+    wire count;
     //se asignaa cada cable el valor de la salida del decode
-    assign incPC = outDecode[12];
-    assign loadPC = outDecode[11];
-    assign loadA = outDecode[10];
-    assign loadFlags = outDecode[9];
-    assign opALU = outDecode[8:6];
-    assign cs = outDecode[5];
-    assign we = outDecode[4];
-    assign eoALU = outDecode[3];
-    assign oeIn = outDecode [2];
-    assign oeOprnd = outDecode [1];
-    assign loadOut = outDecode[0];
-
-    assign address_RAM = {oprnd,program_byte};
+    assign loadPC = 1'b1;
+    assign counter_value = ui_in;
+    assign counter = uo_out;
+    
     //------------------ CONTROL DEL PROGRAMA -------------------------------
-    Contador12b programCouter(loadPC,incPC, clk, ena, address_RAM, PC ); //program counter
-    //counter_12b cont(clk,ena, loadPC,incPC,address_RAM, PC);
-    Memory  programROM(PC, program_byte); // memoria de programa
-    FlipFlopD4b fetchOp(program_byte[3:0], ~phase, ena, clk, oprnd);
-    FlipFlopD4b  fetchIns(program_byte[7:4], ~phase, ena, clk, instr);
-    FlipFlopT   fase(1'b1, ena, clk, phase);
+    Contador8b programCouter(loadPC, ena, clk, rst_n, counter_value, count); //program counter
 
 endmodule
