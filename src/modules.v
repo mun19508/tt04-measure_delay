@@ -12,6 +12,17 @@ module Contador12b(input wire  load,enable,clk,reset, input wire [11:0]valueLoad
     end
 endmodule
     
+module Contador8b(input wire  load,enable,clk,reset, input wire [7:0]valueLoad, output reg [7:0] out );
+
+    always @ (posedge clk, posedge reset, posedge load) begin
+        if (load) out <= valueLoad;// de lo contrario se revisa reset si es un entonces la salida es 0
+        else 
+            if (reset) out <= 0;//de lo contrario se revisa enable y si es 1 la salida se le aumenta 1
+            else if(enable) out <= out + 1;// si es 1 entonces se asigna el valor cargado a la salida
+            else out <= out;
+    end
+endmodule
+    
 
 module counter_12b(input clk, reset, load, eneable, input [11:0] b,
                     output reg [11:0] c);
