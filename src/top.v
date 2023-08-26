@@ -10,14 +10,17 @@ module tt_um_counter #( parameter MAX_COUNT = 10_000_000 )(
 );
     // estos con cables que son usados para conectar las salidas de decode
     wire loadPC;
-    wire counter_value;
-    wire count;
+    reg out;
     //se asignaa cada cable el valor de la salida del decode
     assign loadPC = 1'b1;
-    assign counter_value = ui_in;
-    assign counter = uo_out;
-    
-    //------------------ CONTROL DEL PROGRAMA -------------------------------
-    Contador8b programCouter(loadPC, ena, clk, rst_n, counter_value, count); //program counter
 
+
+    always @ (posedge clk, posedge reset, posedge load) begin
+        if (load) out <= ui_in;// de lo contrario se revisa reset si es un entonces la salida es 0
+        else 
+            if (reset) out <= 0;//de lo contrario se revisa enable y si es 1 la salida se le aumenta 1
+            else if(enable) out <= out + 1;// si es 1 entonces se asigna el valor cargado a la salida
+            else out <= out;
+    end
+    assign uo_out = out;
 endmodule
