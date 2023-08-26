@@ -7,7 +7,6 @@ project:
 # Source files must be in ./src and ydddou must list each source file separately
   source_files:        
     - top.v
-    - modules.v
   top_module:  "tt_um_counter"    # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
@@ -24,7 +23,7 @@ documentation:
   author:       "Angel Orellana"      # Your name
   title:        "Microproccesor"      # Project title
   language:     "verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  "A microprocessor of 8-bit"      # Short description of what your project does
+  description:  "A counter of 8-bit"      # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
@@ -62,7 +61,7 @@ documentation:
     - none
     - none
 # The following fields are optional
-  tag:          "microprocessor"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
+  tag:          "counter"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
   external_hw:  "None"      # Describe any external hardware needed
   discord:      ""      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
   doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
