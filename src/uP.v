@@ -12,8 +12,8 @@ module tt_um_uP #( parameter MAX_COUNT = 24'd10_000_000 ) (
 );
    // estos con cables que son usados para conectar las salidas de decode
     wire [3:0] pushbuttons;          
-    wire [11:0] PC, address_RAM;         
     wire [7:0] program_byte;
+    wire [11:0] PC, address_RAM;         
     wire [3:0] instr, oprnd, data_bus, FF_out, accu; 
     wire clock;
     wire reset;
