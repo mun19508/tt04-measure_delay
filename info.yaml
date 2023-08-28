@@ -6,8 +6,9 @@ project:
 # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
 # Source files must be in ./src and ydddou must list each source file separately
   source_files:        
-    - top2.v
-  top_module:  "tt_um_inverter"    # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
+    - uP.v
+    - modules_up.v
+  top_module:  "tt_um_uP"    # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"    # Valid values: 1x1, 1x2, 2x2, 4x2 or 8x2
@@ -35,22 +36,23 @@ documentation:
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
-    - clock
-    - reset
     - pushbuttons0
     - pushbuttons1
     - pushbuttons2
     - pushbuttons3
+    - none
+    - none
+    - none
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - pc
-    - addr_ram
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
+    - FF_out0
+    - FF_out1
+    - FF_out2
+    - FF_out3
+    - none
+    - none
+    - none
+    - none
   bidirectional:
     - none
     - none
