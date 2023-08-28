@@ -12,8 +12,9 @@ module tt_um_inverter #( parameter MAX_COUNT = 24'd10_000_000 ) (
 );
 
 // Use bidirectional as output
-assign uio_oe =  8'b00000000;
+assign uio_oe =  8'h00;
 
-assign uo_out = ! clk;
+assign uio_out = 8'h00;
+assign uo_out[0] = ! clk;
 
 endmodule
