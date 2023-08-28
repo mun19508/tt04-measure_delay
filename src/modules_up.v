@@ -50,7 +50,7 @@ endmodule
 //---------------- MEMORIAS  --------------------------------------
 module Memory(input wire [11:0] address, output wire [7:0] data );
 
-    reg[7:0] memoria[4095:0];
+    reg[7:0] memoria[1024:0];
 
     initial begin
         $readmemh("memory.list",memoria); // se lee la memoria
