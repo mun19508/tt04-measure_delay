@@ -16,5 +16,6 @@ assign uio_oe =  8'h00;
 
 assign uio_out = 8'h00;
 assign uo_out[0] = ! clk;
+assign uo_out[1:7] = 7'b000000;
 
 endmodule
