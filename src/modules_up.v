@@ -62,7 +62,7 @@ endmodule
 
 module RAM(input [11:0] address, input cs, input we, inout[3:0] data );
     reg [3:0] dataOut;
-    reg [3:0] ram[4095:0];
+    reg [3:0] ram[1024:0];
 
     assign data = (cs & ~we) ? dataOut : 4'bzzzz; // si cs es 1 y we es 0 se le asigna el valor de dataOut de lo contradio esta en z
 
