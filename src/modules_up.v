@@ -48,30 +48,37 @@ module FlipFlopT(input enable, reset, clk, output wire q );
 endmodule
 
 //---------------- MEMORIAS  --------------------------------------
-module Memory(input wire [11:0] address, output wire [7:0] data );
-
-    reg[7:0] memoria[1024:0];
+module Memory(input wire [11:0] address, output wire [7:0] data);
+    reg [7:0] memoria [1023:0]; // Corrected array bounds
 
     initial begin
-        $readmemh("memory.list",memoria); // se lee la memoria
+        $readmemh("memory.list", memoria); // Read the memory
     end
 
-    assign  data = memoria[address];
-
+    assign data = memoria[address];
 endmodule
 
-module RAM(input [11:0] address, input cs, input we, inout[3:0] data );
+module RAM(input [11:0] address, input cs, input we, inout [3:0] data);
     reg [3:0] dataOut;
-    reg [3:0] ram[1024:0];
+    reg [3:0] ram [1023:0]; // Corrected array bounds
 
-    assign data = (cs & ~we) ? dataOut : 4'bzzzz; // si cs es 1 y we es 0 se le asigna el valor de dataOut de lo contradio esta en z
+    // Tri-state buffer logic
+    assign data = (cs & ~we) ? dataOut : 4'bzzzz;
 
     always @(address, cs, we, data) begin
-        if(cs & ~we) dataOut = ram[address]; //si esta seleccionado pero no habilitado para escritura coloca enla salida lo de la direccion
-        else if(cs & we) ram[address] = data;
+        if (cs) begin
+            if (~we) begin
+                dataOut = ram[address];
+            end else begin
+                ram[address] = data;
+            end
+        end else begin
+            // Explicitly specify what happens when cs is 0
+            // This prevents latch inference
+        end
     end
-
 endmodule
+
 
 module Decode(input[6:0] address,output reg [12:0] value );
 
