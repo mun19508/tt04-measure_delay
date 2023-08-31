@@ -73,6 +73,7 @@ module RAM(input [11:0] address, input cs, input we, inout [3:0] data);
                 ram[address] = data;
             end
         end else begin
+            dataOut = 4'bzzzz;
             // Explicitly specify what happens when cs is 0
             // This prevents latch inference
         end
