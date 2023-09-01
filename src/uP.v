@@ -36,12 +36,12 @@ module tt_um_uP #( parameter MAX_COUNT = 24'd10_000_000 ) (
   
     // Assign the input.
     assign uio_out = 8'h00;
-    assign uo_out = 8'h00;
+    assign uo_out[7:4] = 4'h00;
     assign uio_oe = 8'h00;
   
     assign reset = ! rst_n;
     assign clock = clk;
-    assign pushbuttons = ui_in[0:3];
+    assign pushbuttons = ui_in[3:0];
 
     assign inDecode = {instr, c_flag,z_flag,phase}; 
     
@@ -84,6 +84,6 @@ module tt_um_uP #( parameter MAX_COUNT = 24'd10_000_000 ) (
     //--------------- Salida -----------------------------------------------
     FlipFlopD4b salida(data_bus,loadOut, reset, clock, FF_out);
 
-    assign uo_out[0:3] = FF_out;
+    assign uo_out[3:0] = FF_out;
 
 endmodule
