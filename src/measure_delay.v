@@ -32,21 +32,11 @@ assign uo_out[2] = W_3;
 assign EN = ui_in[0];
 assign EN_2 = ui_in[1];
 
-AND_2 U1(EN,EN_2,W_1);
-INV  U2(W_1,W_2);
-INV  U3(W_2,W_3);
-INV  U4(W_3,W_1);
+and_cell U1(EN,EN_2,W_1);
+not_cell U2(W_1,W_2);
+not_cell  U3(W_2,W_3);
+not_cell  U4(W_3,W_1);
 
 endmodule
 
-module INV(A, B);
-    input A;
-    output B;
-    assign B = ~A;
-endmodule
 
-module AND_2(in1, in2, out);
-    input in1, in2;
-    output out;
-    assign out = in1 & in2;
-endmodule
