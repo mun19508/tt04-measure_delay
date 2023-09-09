@@ -33,9 +33,9 @@ assign EN = ui_in[0];
 assign EN_2 = ui_in[1];
 
 AND_2 U1(EN,EN_2,W_1);
-tt_prim_inv U2(W_1,W_2);
-tt_prim_inv  U3(W_2,W_3);
-tt_prim_inv  U4(W_3,W_1);
+tt_prim_inv U2(.a(W_1),.y(W_2));
+tt_prim_inv  U3(.a(W_2),.y(W_3));
+tt_prim_inv  U4(.a(W_3),.y(W_1));
 
 endmodule
 
